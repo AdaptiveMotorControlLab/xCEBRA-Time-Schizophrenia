@@ -1,1 +1,15 @@
 xCEBRA_models*
+classifiers*
+decoder_results*
+Ensemble_models*
+.DS_Store
+*.svg
+*.csv
+*.json
+*.nii
+*.gz
+*.xml
+*.tsv
+*.xlsx
+*labels*
+*relabel*
