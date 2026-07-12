@@ -1,0 +1,41 @@
+{
+  "name": "cebra-dev-repo",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile_CEBRA.dockerfile"
+  },
+
+  "remoteUser": "appuser",
+  "overrideCommand": true,
+  "runArgs": ["--gpus", "all", "--shm-size=2g", "--ipc=host", "--group-add", "1008"],
+
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+
+  "mounts": [
+    "source=/mnt/moritz,target=/mnt/moritz,type=bind,consistency=cached"
+  ],
+
+  "features": { "ghcr.io/devcontainers/features/common-utils:2": {} },
+
+  "forwardPorts": [8888],
+  "portsAttributes": { "8888": { "label": "JupyterLab" } },
+
+  "containerEnv": { "PYTHONUNBUFFERED": "1" },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3",
+        "jupyter.jupyterServerType": "local",
+        "settingsSync.ignoredExtensions": [
+          "ms-toolsai.jupyter",
+          "ms-python.python",
+          "ms-python.vscode-pylance"
+        ]
+      }
+    }
+  },
+
+  "postStartCommand": "bash -lc \"pgrep -f 'jupyter lab' >/dev/null || jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.allow_origin='*' --ServerApp.disable_check_xsrf=True\""
+}
