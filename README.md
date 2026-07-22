@@ -1,25 +1,8 @@
-# xCEBRA-Time-Schizophrenia
+# xCEBRA-Time
 
-This repository contains notebooks for running xCEBRA-based analyses and figure generation for schizophrenia time-series experiments.
-
-## What to install
-
-Primary runtime stack:
-
-- Python 3.10
-- PyTorch (`torch`)
-- CEBRA (`cebra`)
-- Scientific stack: `numpy`, `pandas`, `scipy`, `scikit-learn`
-- Neuroimaging stack: `nibabel`, `nilearn`, `SUITPy`
-- Plotting: `matplotlib`, `seaborn`
-- Utilities used in notebooks: `joblib`, `pingouin`, `openpyxl`
-- Notebook tools: `notebook`, `ipykernel`
-
-Install all dependencies:
-
-```bash
-pip install -r requirements.txt
-```
+This repository contains notebooks for running xCEBRA-based analyses and figure generation for schizophrenia time-series experiments. 
+See our manuscript: "An explainable AI latent space of brain dynamics reveals a cerebello-prefrontal signature of schizophrenia symptoms"
+Moritz Bonhoeffer, Paolo Muratore, Mackenzie Weygandt Mathis & Indrit Bègue.
 
 ## Repository contents
 
@@ -29,16 +12,6 @@ pip install -r requirements.txt
 - `Data_Pipeline_for_publishing/` — preprocessing and atlas/time-course preparation notebooks.
 - `Plotting_for_figures/` — plotting notebooks and generated figures.
 
-## Dependency graph
-
-```mermaid
-flowchart TD
-    NB[Notebooks in this repo] --> CORE[torch + cebra]
-    NB --> SCI[numpy + pandas + scipy + scikit-learn]
-    NB --> NEURO[nibabel + nilearn + SUITPy]
-    NB --> PLOT[matplotlib + seaborn]
-    NB --> UTIL[joblib + pingouin + openpyxl]
-```
 
 ## Easy run instructions
 
@@ -47,7 +20,7 @@ flowchart TD
 1. Create and activate a virtual environment:
    - `python -m venv .venv`
    - `source .venv/bin/activate` (Linux/macOS) or `.venv\\Scripts\\activate` (Windows)
-2. Install dependencies:
+2. Install dependencies (see below):
    - `pip install -r requirements.txt`
 3. Start Jupyter:
    - `jupyter notebook`
@@ -66,6 +39,37 @@ flowchart TD
    - `docker run --rm -p 8888:8888 -v "$PWD":/workspace xcebra-schizophrenia`
 3. Open Jupyter in your browser at the URL shown in the container output.
 
+## Required Software Stack
+
+Install all dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Primary runtime stack:
+
+- Python 3.10
+- PyTorch (`torch`)
+- CEBRA (`cebra`)
+- Scientific stack: `numpy`, `pandas`, `scipy`, `scikit-learn`
+- Neuroimaging stack: `nibabel`, `nilearn`, `SUITPy`
+- Plotting: `matplotlib`, `seaborn`
+- Utilities used in notebooks: `joblib`, `pingouin`, `openpyxl`
+- Notebook tools: `notebook`, `ipykernel`
+
+
+### Dependency graph
+
+```mermaid
+flowchart TD
+    NB[Notebooks in this repo] --> CORE[torch + cebra]
+    NB --> SCI[numpy + pandas + scipy + scikit-learn]
+    NB --> NEURO[nibabel + nilearn + SUITPy]
+    NB --> PLOT[matplotlib + seaborn]
+    NB --> UTIL[joblib + pingouin + openpyxl]
+```
+
 ## View notebooks with Jupyter Book
 
 This repo includes Jupyter Book configuration files:
@@ -82,20 +86,3 @@ To build and serve the book locally:
 3. Open:
    - `_build/html/index.html`
 
-## Workflow graph for notebook execution
-
-```mermaid
-flowchart LR
-    A[Data_Pipeline_for_publishing notebooks] --> B[xCEBRA_combined.ipynb]
-    B --> C[Ensemble_xCEBRA_models.ipynb]
-    B --> D[Decode_clinical_variables_different_decoders.ipynb]
-    B --> E[Plotting_for_figures notebooks]
-```
-
-## Table of contents (Jupyter Book)
-
-The notebook navigation is defined in `_toc.yml` and grouped into:
-
-- Main analyses
-- Data pipeline
-- Plotting notebooks
