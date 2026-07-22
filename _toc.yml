@@ -1,0 +1,23 @@
+format: jb-book
+root: README
+
+parts:
+  - caption: Main analyses
+    chapters:
+      - file: xCEBRA_combined
+      - file: Ensemble_xCEBRA_models
+      - file: Decode_clinical_variables_different_decoders
+
+  - caption: Data pipeline
+    chapters:
+      - file: Data_Pipeline_for_publishing/Create_metadata_files
+      - file: Data_Pipeline_for_publishing/Get_Harvard_Oxford
+      - file: Data_Pipeline_for_publishing/Concatenate_nii_frames
+      - file: Data_Pipeline_for_publishing/Convert_nii_to_atlas_tc_Harvard_Oxford
+      - file: Data_Pipeline_for_publishing/Resample_cerebellum_atlas
+
+  - caption: Plotting notebooks
+    chapters:
+      - file: Plotting_for_figures/Plot_embedding
+      - file: Plotting_for_figures/Plot_atlas_on_MNI
+      - file: Plotting_for_figures/Plot_timepoints_of_attribution_map_figure_1
