@@ -1,0 +1,17 @@
+torch
+cebra
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+seaborn
+nibabel
+nilearn
+SUITPy
+joblib
+pingouin
+openpyxl
+notebook
+ipykernel
+jupyter-book

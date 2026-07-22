@@ -2,6 +2,25 @@
 
 This repository contains notebooks for running xCEBRA-based analyses and figure generation for schizophrenia time-series experiments.
 
+## What to install
+
+Primary runtime stack:
+
+- Python 3.10
+- PyTorch (`torch`)
+- CEBRA (`cebra`)
+- Scientific stack: `numpy`, `pandas`, `scipy`, `scikit-learn`
+- Neuroimaging stack: `nibabel`, `nilearn`, `SUITPy`
+- Plotting: `matplotlib`, `seaborn`
+- Utilities used in notebooks: `joblib`, `pingouin`, `openpyxl`
+- Notebook tools: `notebook`, `ipykernel`
+
+Install all dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Repository contents
 
 - `xCEBRA_combined.ipynb` — main xCEBRA workflow.
@@ -9,6 +28,43 @@ This repository contains notebooks for running xCEBRA-based analyses and figure 
 - `Decode_clinical_variables_different_decoders.ipynb` — decoder comparison for clinical variables.
 - `Data_Pipeline_for_publishing/` — preprocessing and atlas/time-course preparation notebooks.
 - `Plotting_for_figures/` — plotting notebooks and generated figures.
+
+## Dependency graph
+
+```mermaid
+flowchart TD
+    NB[Notebooks in this repo] --> CORE[torch + cebra]
+    NB --> SCI[numpy + pandas + scipy + scikit-learn]
+    NB --> NEURO[nibabel + nilearn + SUITPy]
+    NB --> PLOT[matplotlib + seaborn]
+    NB --> UTIL[joblib + pingouin + openpyxl]
+```
+
+## Easy run instructions
+
+### Option A: Run locally with Python
+
+1. Create and activate a virtual environment:
+   - `python -m venv .venv`
+   - `source .venv/bin/activate` (Linux/macOS) or `.venv\\Scripts\\activate` (Windows)
+2. Install dependencies:
+   - `pip install -r requirements.txt`
+3. Start Jupyter:
+   - `jupyter notebook`
+4. Open notebooks in this recommended order:
+   - `Data_Pipeline_for_publishing/*.ipynb`
+   - `xCEBRA_combined.ipynb`
+   - `Ensemble_xCEBRA_models.ipynb`
+   - `Decode_clinical_variables_different_decoders.ipynb`
+   - `Plotting_for_figures/*.ipynb`
+
+### Option B: Run with Docker
+
+1. Build:
+   - `docker build -t xcebra-schizophrenia .`
+2. Run:
+   - `docker run --rm -p 8888:8888 -v "$PWD":/workspace xcebra-schizophrenia`
+3. Open Jupyter in your browser at the URL shown in the container output.
 
 ## View notebooks with Jupyter Book
 
@@ -26,7 +82,17 @@ To build and serve the book locally:
 3. Open:
    - `_build/html/index.html`
 
-## Table of contents
+## Workflow graph for notebook execution
+
+```mermaid
+flowchart LR
+    A[Data_Pipeline_for_publishing notebooks] --> B[xCEBRA_combined.ipynb]
+    B --> C[Ensemble_xCEBRA_models.ipynb]
+    B --> D[Decode_clinical_variables_different_decoders.ipynb]
+    B --> E[Plotting_for_figures notebooks]
+```
+
+## Table of contents (Jupyter Book)
 
 The notebook navigation is defined in `_toc.yml` and grouped into:
 
