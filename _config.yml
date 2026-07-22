@@ -1,0 +1,8 @@
+title: xCEBRA Time Schizophrenia
+author: MLAI
+logo: ""
+
+execute:
+  execute_notebooks: "off"
+
+only_build_toc_files: true
