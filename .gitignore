@@ -13,3 +13,6 @@ Ensemble_models*
 *.xlsx
 *labels*
 *relabel*
+
+# Dev container config (Ausnahme von *.json)
+!.devcontainer/devcontainer.json
