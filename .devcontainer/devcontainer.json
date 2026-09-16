@@ -13,7 +13,7 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
 
   "mounts": [
-    "source=/mnt/moritz,target=/mnt/moritz,type=bind,consistency=cached"
+    "source=${localEnv:DATA_ROOT},target=/data,type=bind,consistency=cached"
   ],
 
   "features": { "ghcr.io/devcontainers/features/common-utils:2": {} },

@@ -38,6 +38,7 @@ Moritz Bonhoeffer, Paolo Muratore, Mackenzie Weygandt Mathis & Indrit Bègue.
 2. Run:
    - `docker run --rm -p 8888:8888 -v "$PWD":/workspace xcebra-schizophrenia`
 3. Open Jupyter in your browser at the URL shown in the container output.
+4. Configure your external dataset root at `/data` before running the notebooks. When using the devcontainer, set the local `DATA_ROOT` environment variable so it mounts into the container at `/data`.
 
 ## Required Software Stack
 
