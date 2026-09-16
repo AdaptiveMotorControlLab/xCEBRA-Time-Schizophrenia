@@ -1,0 +1,831 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Only keep really subcortical labels &#8212; xCEBRA Time Schizophrenia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Data_Pipeline_for_publishing/Get_Harvard_Oxford';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Concatenate .nii frames" href="Concatenate_nii_frames.html" />
+    <link rel="prev" title="Create excel sheet for GENEVA dataset" href="Create_metadata_files.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">xCEBRA Time Schizophrenia</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    xCEBRA-Time
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Main analyses</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../xCEBRA_combined.html">Dependencies</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Decode_clinical_variables_different_decoders.html">Decoding function</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data pipeline</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Create_metadata_files.html">Create excel sheet for GENEVA dataset</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Only keep really subcortical labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Concatenate_nii_frames.html">Concatenate .nii frames</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Convert_nii_to_atlas_tc_Harvard_Oxford.html">For Schizophrenia</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Resample_cerebellum_atlas.html">ATHENA</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Data_Pipeline_for_publishing/Get_Harvard_Oxford.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Only keep really subcortical labels</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="c1"># your target folder</span>
+<span class="n">save_dir</span> <span class="o">=</span> <span class="s2">"/Volumes/Genf/Atlases/Oxford-Cortical-Atlas"</span>   <span class="c1"># &lt;-- change this</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Fetch cortical deterministic atlas</span>
+<span class="n">atlas_cort</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_atlas_harvard_oxford</span><span class="p">(</span>
+    <span class="n">atlas_name</span><span class="o">=</span><span class="s2">"cort-maxprob-thr50-2mm"</span><span class="p">,</span>
+    <span class="n">symmetric_split</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">save_dir</span>
+<span class="p">)</span>
+
+<span class="c1"># Fetch subcortical deterministic atlas</span>
+<span class="n">atlas_sub</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_atlas_harvard_oxford</span><span class="p">(</span>
+    <span class="n">atlas_name</span><span class="o">=</span><span class="s2">"sub-maxprob-thr50-2mm"</span><span class="p">,</span>
+    <span class="n">symmetric_split</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">save_dir</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cortical atlas file:"</span><span class="p">,</span> <span class="n">atlas_cort</span><span class="o">.</span><span class="n">maps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cortical labels:"</span><span class="p">,</span> <span class="n">atlas_cort</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>  <span class="c1"># preview first 10 labels</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Subcortical atlas file:"</span><span class="p">,</span> <span class="n">atlas_sub</span><span class="o">.</span><span class="n">maps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Subcortical labels:"</span><span class="p">,</span> <span class="n">atlas_sub</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cortical atlas file: 
+&lt;class 'nibabel.nifti1.Nifti1Image'&gt;
+data shape (91, 109, 91)
+affine:
+[[   2.    0.    0.  -90.]
+ [   0.    2.    0. -126.]
+ [   0.    0.    2.  -72.]
+ [   0.    0.    0.    1.]]
+metadata:
+&lt;class 'nibabel.nifti1.Nifti1Header'&gt; object, endian='&lt;'
+sizeof_hdr      : 348
+data_type       : b''
+db_name         : b''
+extents         : 0
+session_error   : 0
+regular         : b''
+dim_info        : 0
+dim             : [  3  91 109  91   1   1   1   1]
+intent_p1       : 0.0
+intent_p2       : 0.0
+intent_p3       : 0.0
+intent_code     : none
+datatype        : uint8
+bitpix          : 8
+slice_start     : 0
+pixdim          : [1. 2. 2. 2. 1. 1. 1. 1.]
+vox_offset      : 0.0
+scl_slope       : nan
+scl_inter       : nan
+slice_end       : 0
+slice_code      : unknown
+xyzt_units      : 0
+cal_max         : 0.0
+cal_min         : 0.0
+slice_duration  : 0.0
+toffset         : 0.0
+glmax           : 0
+glmin           : 0
+descrip         : b''
+aux_file        : b''
+qform_code      : unknown
+sform_code      : aligned
+quatern_b       : 0.0
+quatern_c       : 0.0
+quatern_d       : 0.0
+qoffset_x       : -90.0
+qoffset_y       : -126.0
+qoffset_z       : -72.0
+srow_x          : [  2.   0.   0. -90.]
+srow_y          : [   0.    2.    0. -126.]
+srow_z          : [  0.   0.   2. -72.]
+intent_name     : b''
+magic           : b'n+1'
+
+Cortical labels: ['Background', 'Frontal Pole', 'Insular Cortex', 'Superior Frontal Gyrus', 'Middle Frontal Gyrus', 'Inferior Frontal Gyrus, pars triangularis', 'Inferior Frontal Gyrus, pars opercularis', 'Precentral Gyrus', 'Temporal Pole', 'Superior Temporal Gyrus, anterior division', 'Superior Temporal Gyrus, posterior division', 'Middle Temporal Gyrus, anterior division', 'Middle Temporal Gyrus, posterior division', 'Middle Temporal Gyrus, temporooccipital part', 'Inferior Temporal Gyrus, anterior division', 'Inferior Temporal Gyrus, posterior division', 'Inferior Temporal Gyrus, temporooccipital part', 'Postcentral Gyrus', 'Superior Parietal Lobule', 'Supramarginal Gyrus, anterior division', 'Supramarginal Gyrus, posterior division', 'Angular Gyrus', 'Lateral Occipital Cortex, superior division', 'Lateral Occipital Cortex, inferior division', 'Intracalcarine Cortex', 'Frontal Medial Cortex', 'Juxtapositional Lobule Cortex (formerly Supplementary Motor Cortex)', 'Subcallosal Cortex', 'Paracingulate Gyrus', 'Cingulate Gyrus, anterior division', 'Cingulate Gyrus, posterior division', 'Precuneous Cortex', 'Cuneal Cortex', 'Frontal Orbital Cortex', 'Parahippocampal Gyrus, anterior division', 'Parahippocampal Gyrus, posterior division', 'Lingual Gyrus', 'Temporal Fusiform Cortex, anterior division', 'Temporal Fusiform Cortex, posterior division', 'Temporal Occipital Fusiform Cortex', 'Occipital Fusiform Gyrus', 'Frontal Opercular Cortex', 'Central Opercular Cortex', 'Parietal Opercular Cortex', 'Planum Polare', "Heschl's Gyrus (includes H1 and H2)", 'Planum Temporale', 'Supracalcarine Cortex', 'Occipital Pole']
+Subcortical atlas file: 
+&lt;class 'nibabel.nifti1.Nifti1Image'&gt;
+data shape (91, 109, 91)
+affine:
+[[   2.    0.    0.  -90.]
+ [   0.    2.    0. -126.]
+ [   0.    0.    2.  -72.]
+ [   0.    0.    0.    1.]]
+metadata:
+&lt;class 'nibabel.nifti1.Nifti1Header'&gt; object, endian='&lt;'
+sizeof_hdr      : 348
+data_type       : b''
+db_name         : b''
+extents         : 0
+session_error   : 0
+regular         : b''
+dim_info        : 0
+dim             : [  3  91 109  91   1   1   1   1]
+intent_p1       : 0.0
+intent_p2       : 0.0
+intent_p3       : 0.0
+intent_code     : none
+datatype        : float32
+bitpix          : 32
+slice_start     : 0
+pixdim          : [1. 2. 2. 2. 1. 1. 1. 1.]
+vox_offset      : 0.0
+scl_slope       : nan
+scl_inter       : nan
+slice_end       : 0
+slice_code      : unknown
+xyzt_units      : 0
+cal_max         : 0.0
+cal_min         : 0.0
+slice_duration  : 0.0
+toffset         : 0.0
+glmax           : 0
+glmin           : 0
+descrip         : b''
+aux_file        : b''
+qform_code      : unknown
+sform_code      : aligned
+quatern_b       : 0.0
+quatern_c       : 0.0
+quatern_d       : 0.0
+qoffset_x       : -90.0
+qoffset_y       : -126.0
+qoffset_z       : -72.0
+srow_x          : [  2.   0.   0. -90.]
+srow_y          : [   0.    2.    0. -126.]
+srow_z          : [  0.   0.   2. -72.]
+intent_name     : b''
+magic           : b'n+1'
+
+Subcortical labels: ['Background', 'Left Cerebral White Matter', 'Left Cerebral Cortex', 'Left Lateral Ventricle', 'Left Thalamus', 'Left Caudate', 'Left Putamen', 'Left Pallidum', 'Brain-Stem', 'Left Hippocampus', 'Left Amygdala', 'Left Accumbens', 'Right Cerebral White Matter', 'Right Cerebral Cortex', 'Right Lateral Ventricle', 'Right Thalamus', 'Right Caudate', 'Right Putamen', 'Right Pallidum', 'Right Hippocampus', 'Right Amygdala', 'Right Accumbens']
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="only-keep-really-subcortical-labels">
+<h1>Only keep really subcortical labels<a class="headerlink" href="#only-keep-really-subcortical-labels" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># ---- INPUTS ----</span>
+<span class="n">ATLAS_NII</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"/Volumes/Genf/Atlases/Oxford-Cortical-Atlas/fsl/data/atlases/HarvardOxford/HarvardOxford-sub-maxprob-thr50-2mm.nii.gz"</span><span class="p">)</span>
+<span class="c1"># (Optional) try to read an XML labels file next to the atlas; if missing we’ll fall back to nilearn’s labels</span>
+<span class="n">ATLAS_XML</span> <span class="o">=</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s2">"HarvardOxford-Subcortical.xml"</span><span class="p">)</span>
+
+<span class="c1"># Keep exactly these labels (Harvard–Oxford naming)</span>
+<span class="n">SELECTED</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'Left Thalamus'</span><span class="p">,</span> <span class="s1">'Left Caudate'</span><span class="p">,</span> <span class="s1">'Left Putamen'</span><span class="p">,</span> <span class="s1">'Left Pallidum'</span><span class="p">,</span>
+    <span class="s1">'Brain-Stem'</span><span class="p">,</span>
+    <span class="s1">'Left Hippocampus'</span><span class="p">,</span> <span class="s1">'Left Amygdala'</span><span class="p">,</span> <span class="s1">'Left Accumbens'</span><span class="p">,</span>
+    <span class="s1">'Right Thalamus'</span><span class="p">,</span> <span class="s1">'Right Caudate'</span><span class="p">,</span> <span class="s1">'Right Putamen'</span><span class="p">,</span> <span class="s1">'Right Pallidum'</span><span class="p">,</span>
+    <span class="s1">'Right Hippocampus'</span><span class="p">,</span> <span class="s1">'Right Amygdala'</span><span class="p">,</span> <span class="s1">'Right Accumbens'</span>
+<span class="p">]</span>
+
+<span class="c1"># ---- OUTPUTS ----</span>
+<span class="n">OUT_NII</span> <span class="o">=</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">".nii.gz"</span><span class="p">,</span> <span class="s2">"-only_subcortical_regions.nii.gz"</span><span class="p">))</span>
+<span class="n">OUT_LUT</span> <span class="o">=</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">".nii.gz"</span><span class="p">,</span> <span class="s2">"-subset_labels.tsv"</span><span class="p">))</span>
+
+<span class="c1"># ---- UTIL: load label names (index -&gt; name) ----</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_ho_subcortical_labels</span><span class="p">():</span>
+    <span class="c1"># 1) try local XML (FSL ships HarvardOxford-Subcortical.xml)</span>
+    <span class="k">if</span> <span class="n">ATLAS_XML</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">ATLAS_XML</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+        <span class="c1"># FSL XML has elements like &lt;label index="1"&gt;Left Thalamus&lt;/label&gt;</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">"label"</span><span class="p">):</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"index"</span><span class="p">,</span> <span class="s2">"-1"</span><span class="p">))</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">text</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="c1"># Ensure background 0 exists</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"Background"</span><span class="p">)</span>
+        <span class="c1"># Return dense list from 0..max</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Unknown_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="c1"># 2) fallback: nilearn (same ordering as their atlas files)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">nilearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">datasets</span>
+        <span class="n">atlas</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_atlas_harvard_oxford</span><span class="p">(</span><span class="s2">"sub-maxprob-thr50-2mm"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">atlas</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>  <span class="c1"># index-aligned; labels[0] == 'Background'</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s2">"Could not find XML next to the atlas and nilearn fallback failed. "</span>
+            <span class="s2">"Please provide a label list."</span>
+        <span class="p">)</span>
+
+<span class="c1"># ---- MAIN ----</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Atlas not found: </span><span class="si">{</span><span class="n">ATLAS_NII</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># load labels and make a name-&gt;index map (case/spacing normalized)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">load_ho_subcortical_labels</span><span class="p">()</span>  <span class="c1"># list indexed by integer voxel value</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="n">name_to_idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">norm</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">)}</span>
+
+    <span class="n">wanted_idx</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">SELECTED</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">name_to_idx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">missing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">wanted_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[WARN] The following requested labels were not found in the atlas:"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">missing</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"   -"</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="c1"># continue with those we found</span>
+    <span class="n">wanted_idx</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">wanted_idx</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">wanted_idx</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"None of the requested labels were found. Aborting."</span><span class="p">)</span>
+
+    <span class="c1"># load atlas image and data</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ATLAS_NII</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dataobj</span><span class="p">)</span>  <span class="c1"># int labels (0..N)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+
+    <span class="c1"># relabel selected indices to 1..K in the order we defined above</span>
+    <span class="n">idx_to_new</span> <span class="o">=</span> <span class="p">{</span><span class="n">old</span><span class="p">:</span> <span class="n">new</span> <span class="k">for</span> <span class="n">new</span><span class="p">,</span> <span class="n">old</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wanted_idx</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">old_idx</span><span class="p">,</span> <span class="n">new_idx</span> <span class="ow">in</span> <span class="n">idx_to_new</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">data</span> <span class="o">==</span> <span class="n">old_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_idx</span>
+
+    <span class="c1"># save NIfTI with same affine / header (but ensure integer dtype)</span>
+    <span class="n">out_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+    <span class="n">out_img</span><span class="o">.</span><span class="n">set_data_dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+    <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">out_img</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">OUT_NII</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SAVED] subset atlas: </span><span class="si">{</span><span class="n">OUT_NII</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># write label table TSV</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUT_LUT</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"index</span><span class="se">\t</span><span class="s2">label</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">old_idx</span> <span class="ow">in</span> <span class="n">wanted_idx</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">idx_to_new</span><span class="p">[</span><span class="n">old_idx</span><span class="p">]</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="n">old_idx</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SAVED] labels: </span><span class="si">{</span><span class="n">OUT_LUT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># quick summary</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kept </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">wanted_idx</span><span class="p">)</span><span class="si">}</span><span class="s2"> labels → indices 1..</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">wanted_idx</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"First few:"</span><span class="p">,</span> <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">wanted_idx</span><span class="p">[:</span><span class="mi">5</span><span class="p">]])</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[SAVED] subset atlas: /Volumes/Genf/Atlases/Oxford-Cortical-Atlas/fsl/data/atlases/HarvardOxford/HarvardOxford-sub-maxprob-thr50-2mm-only_subcortical_regions.nii.gz
+[SAVED] labels: /Volumes/Genf/Atlases/Oxford-Cortical-Atlas/fsl/data/atlases/HarvardOxford/HarvardOxford-sub-maxprob-thr50-2mm-subset_labels.tsv
+Kept 15 labels → indices 1..15
+First few: ['Left Thalamus', 'Left Caudate', 'Left Putamen', 'Left Pallidum', 'Brain-Stem']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># ---- INPUT ----</span>
+<span class="n">ATLAS_NII</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"/Volumes/Genf/Atlases/Oxford-Cortical-Atlas/fsl/data/atlases/HarvardOxford/HarvardOxford-cortl-maxprob-thr50-2mm.nii.gz"</span><span class="p">)</span>
+<span class="n">ATLAS_XML</span> <span class="o">=</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="s2">"HarvardOxford-Cortical.xml"</span><span class="p">)</span>  <span class="c1"># if present, we’ll read labels from here</span>
+
+<span class="c1"># ---- OUTPUT ----</span>
+<span class="n">OUT_NII</span> <span class="o">=</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">".nii.gz"</span><span class="p">,</span> <span class="s2">"-without_background.nii.gz"</span><span class="p">))</span>
+<span class="n">OUT_LUT</span> <span class="o">=</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">".nii.gz"</span><span class="p">,</span> <span class="s2">"-nobg_labels.tsv"</span><span class="p">))</span>
+
+<span class="c1"># If you want to *reindex* labels to 1..K (drop background=0 and compress),</span>
+<span class="c1"># set this to True. By default we keep the original label indices.</span>
+<span class="n">REINDEX_TO_COMPACT</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_ho_cortical_labels</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Return list of labels (index-aligned), labels[0] should be 'Background'."""</span>
+    <span class="c1"># 1) Try local FSL XML</span>
+    <span class="k">if</span> <span class="n">ATLAS_XML</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">ATLAS_XML</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">"label"</span><span class="p">):</span>  <span class="c1"># &lt;label index="1"&gt;Frontal Pole&lt;/label&gt;</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"index"</span><span class="p">,</span> <span class="s2">"-1"</span><span class="p">))</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">text</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"Background"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Unknown_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="c1"># 2) Fallback: nilearn dataset</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">nilearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">datasets</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"ERROR: Could not find label XML next to the atlas. Falling back to nilearn’s labels."</span><span class="p">)</span>
+        <span class="n">atlas</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_atlas_harvard_oxford</span><span class="p">(</span><span class="s2">"cort-maxprob-thr50-2mm"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">atlas</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>  <span class="c1"># labels[0] == 'Background'</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Could not find label XML and nilearn fallback failed. Provide a label list."</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ATLAS_NII</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Atlas not found: </span><span class="si">{</span><span class="n">ATLAS_NII</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Load atlas and labels</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ATLAS_NII</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dataobj</span><span class="p">)</span>  <span class="c1"># integer labels: 0..N</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">load_ho_cortical_labels</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span> <span class="ow">or</span> <span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"background"</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[WARN] labels[0] is not 'Background' as expected. Continuing."</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">REINDEX_TO_COMPACT</span><span class="p">:</span>
+        <span class="c1"># Create a compact atlas: map unique labels &gt;0 to 1..K, background stays 0</span>
+        <span class="n">uniq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">uniq</span> <span class="o">=</span> <span class="n">uniq</span><span class="p">[</span><span class="n">uniq</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">idx_to_new</span> <span class="o">=</span> <span class="p">{</span><span class="n">old</span><span class="p">:</span> <span class="n">new</span> <span class="k">for</span> <span class="n">new</span><span class="p">,</span> <span class="n">old</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">uniq</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)}</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">idx_to_new</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">out</span><span class="p">[</span><span class="n">data</span> <span class="o">==</span> <span class="n">old</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
+        <span class="c1"># Save NIfTI</span>
+        <span class="n">out_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">affine</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="n">out_img</span><span class="o">.</span><span class="n">set_data_dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+        <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">out_img</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">OUT_NII</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SAVED] cortical atlas (compact, no background label in LUT): </span><span class="si">{</span><span class="n">OUT_NII</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="c1"># Save LUT without background, remapped to 1..K</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUT_LUT</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"index</span><span class="se">\t</span><span class="s2">label</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">old</span> <span class="ow">in</span> <span class="n">uniq</span><span class="p">:</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="n">idx_to_new</span><span class="p">[</span><span class="n">old</span><span class="p">]</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">old</span><span class="p">]</span> <span class="k">if</span> <span class="n">old</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"Label_</span><span class="si">{</span><span class="n">old</span><span class="si">}</span><span class="s2">"</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">new</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SAVED] labels TSV (no background): </span><span class="si">{</span><span class="n">OUT_LUT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Keep original indices/data; just write a LUT without the background row</span>
+        <span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">),</span> <span class="n">img</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">OUT_NII</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SAVED] cortical atlas copy (data unchanged): </span><span class="si">{</span><span class="n">OUT_NII</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUT_LUT</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"index</span><span class="se">\t</span><span class="s2">label</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>   <span class="c1"># skip background</span>
+                    <span class="k">continue</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[SAVED] labels TSV (no background row): </span><span class="si">{</span><span class="n">OUT_LUT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR: Could not find label XML next to the atlas. Falling back to nilearn’s labels.
+[SAVED] cortical atlas copy (data unchanged): /Volumes/Genf/Atlases/Oxford-Cortical-Atlas/fsl/data/atlases/HarvardOxford/HarvardOxford-cortl-maxprob-thr50-2mm-without_background.nii.gz
+[SAVED] labels TSV (no background row): /Volumes/Genf/Atlases/Oxford-Cortical-Atlas/fsl/data/atlases/HarvardOxford/HarvardOxford-cortl-maxprob-thr50-2mm-nobg_labels.tsv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "tensorflow"
+        },
+        kernelOptions: {
+            name: "tensorflow",
+            path: "./Data_Pipeline_for_publishing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'tensorflow'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Create_metadata_files.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Create excel sheet for GENEVA dataset</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Concatenate_nii_frames.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Concatenate .nii frames</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MLAI
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
