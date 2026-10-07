@@ -390,6 +390,7 @@ document.write(`
 
 <span class="c1">### SET BASE_DIR ###</span>
 <span class="n">BASE_DIR</span> <span class="o">=</span> <span class="s1">'/mnt/moritz'</span>
+<span class="n">BASE_DIR</span> <span class="o">=</span> <span class="s1">'/workspaces'</span>
 </pre></div>
 </div>
 </div>
@@ -545,7 +546,6 @@ document.write(`
 <span class="n">merged_df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_df2</span><span class="p">,</span> <span class="n">df_movement</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'sub_id'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
 
 <span class="n">combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">merged_df1</span><span class="p">,</span> <span class="n">merged_df2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">combined</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="n">cols_to_nan</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"panss_negative"</span><span class="p">,</span>
@@ -562,19 +562,6 @@ document.write(`
 
 
 <span class="n">combined</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">combined</span><span class="p">[</span><span class="s2">"sub_id"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"4015"</span><span class="p">,</span> <span class="n">cols_to_nan</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># Did not complete PANSS assessment</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index(['sub_id', 'session', 'risperidon_score', 'bacs_total', 'bacs_att',
-       'panss_positive', 'panss_negative', 'panss_negative_EPA',
-       'panss_apathy_Indrit', 'age_years', 'sex', 'bnss_apathy', 'group',
-       'mean_movement', 'ds_type', 'CAINS_MAP', 'fluid_cognition_score',
-       'crystal_cognition_score', 'total_cognition_score',
-       'lifetime_antipsychotic_drug', 'CPZ_score', 'money_delay_auc_200',
-       'money_delay_auc_40000', 'pattern_processing_speed_NIH',
-       'grip_strength_age_unadjusted', 'panss_general', 'interview_age'],
-      dtype='object')
 </pre></div>
 </div>
 </div>
@@ -1111,7 +1098,7 @@ document.write(`
 
 
 <span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'panss_negative_EPA'</span><span class="p">,</span><span class="s1">'panss_positive'</span><span class="p">,</span><span class="s1">'CPZ_equivalent_calculated'</span><span class="p">,</span>
-        <span class="s1">'bacs_att'</span><span class="p">,</span><span class="s1">'total_cognition_score'</span><span class="p">,</span><span class="s1">'age_years'</span><span class="p">,</span> <span class="s1">'bnss_apathy'</span><span class="p">,</span> <span class="s1">'bacs_total'</span><span class="p">,</span> <span class="s1">'pattern_processing_speed_NIH'</span>
+        <span class="s1">'total_cognition_score'</span><span class="p">,</span><span class="s1">'age_years'</span><span class="p">,</span> <span class="s1">'bnss_apathy'</span><span class="p">,</span> <span class="s1">'bacs_total'</span>
 <span class="p">]</span>
 
 <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">"CEBRA_project/Scripts_to_publish/decoder_results_only_kNN_xCEBRA"</span><span class="p">)</span>
@@ -1779,12 +1766,10 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[SKIP TARGET] panss_negative_EPA already completed
 [SKIP TARGET] panss_positive already completed
 [SKIP TARGET] CPZ_equivalent_calculated already completed
-[SKIP TARGET] bacs_att already completed
 [SKIP TARGET] total_cognition_score already completed
 [SKIP TARGET] age_years already completed
 [SKIP TARGET] bnss_apathy already completed
 [SKIP TARGET] bacs_total already completed
-[SKIP TARGET] pattern_processing_speed_NIH already completed
 [ALL DONE]
 </pre></div>
 </div>
@@ -1795,7 +1780,8 @@ document.write(`
 <h1>Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Helper Functions ---</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="c1"># --- Helper Functions ---</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">safe_name</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[^a-zA-Z0-9]+"</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
 
@@ -1825,6 +1811,14 @@ document.write(`
     <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">"=nan"</span>
     <span class="k">return</span> <span class="s2">"&lt;0.001"</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">0.001</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"=</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_pearson_ci</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""95% CI for Pearson r via Fisher z-transformation."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctanh</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">zc</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="n">zc</span> <span class="o">*</span> <span class="n">se</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="n">zc</span> <span class="o">*</span> <span class="n">se</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_outer_from_path</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"_outer(\d+)\.csv$"</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
@@ -1971,6 +1965,9 @@ document.write(`
 
     <span class="n">met_all</span> <span class="o">=</span> <span class="n">_metrics</span><span class="p">(</span><span class="n">df_te_best</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">df_te_best</span><span class="p">[</span><span class="s2">"y_pred"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
 
+    <span class="n">ci_lo</span><span class="p">,</span> <span class="n">ci_hi</span> <span class="o">=</span> <span class="n">_pearson_ci</span><span class="p">(</span><span class="n">met_all</span><span class="p">[</span><span class="s2">"pearson"</span><span class="p">],</span> <span class="n">met_all</span><span class="p">[</span><span class="s2">"n"</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">tcol</span><span class="si">}</span><span class="s2">] combined: n=</span><span class="si">{</span><span class="n">met_all</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="si">}</span><span class="s2">, r=</span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">met_all</span><span class="p">[</span><span class="s1">'pearson'</span><span class="p">])</span><span class="si">}</span><span class="s2">, 95% CI [</span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">ci_lo</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">ci_hi</span><span class="p">)</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+
     <span class="n">fig_te</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_te</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">])</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_te_best</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">],</span> <span class="n">df_te_best</span><span class="p">[</span><span class="s2">"y_pred"</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.70</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">plot_color</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -2033,6 +2030,8 @@ document.write(`
 
             <span class="c1"># Calculate and add metrics</span>
             <span class="n">met_ds</span> <span class="o">=</span> <span class="n">_metrics</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">g</span><span class="p">[</span><span class="s2">"y_pred"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+            <span class="n">ci_lo</span><span class="p">,</span> <span class="n">ci_hi</span> <span class="o">=</span> <span class="n">_pearson_ci</span><span class="p">(</span><span class="n">met_ds</span><span class="p">[</span><span class="s2">"pearson"</span><span class="p">],</span> <span class="n">met_ds</span><span class="p">[</span><span class="s2">"n"</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">tcol</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">ds</span><span class="si">}</span><span class="s2">: n=</span><span class="si">{</span><span class="n">met_ds</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="si">}</span><span class="s2">, r=</span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">met_ds</span><span class="p">[</span><span class="s1">'pearson'</span><span class="p">])</span><span class="si">}</span><span class="s2">, 95% CI [</span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">ci_lo</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">ci_hi</span><span class="p">)</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
             <span class="n">ax_i</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span>
                       <span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">met_ds</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">r=</span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">met_ds</span><span class="p">[</span><span class="s1">'pearson'</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">R2=</span><span class="si">{</span><span class="n">_fmt</span><span class="p">(</span><span class="n">met_ds</span><span class="p">[</span><span class="s1">'r2'</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">p</span><span class="si">{</span><span class="n">_fmt_p</span><span class="p">(</span><span class="n">met_ds</span><span class="p">[</span><span class="s1">'pearson_p'</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
                       <span class="n">transform</span><span class="o">=</span><span class="n">ax_i</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"top"</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -2067,17 +2066,15 @@ document.write(`
     <span class="s2">"panss_negative_EPA"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"PANSS Negative"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"purple"</span><span class="p">},</span>
     <span class="s2">"panss_positive"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"PANSS Positive"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"purple"</span><span class="p">},</span>
     <span class="s2">"bnss_apathy"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"BNSS Apathy"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"purple"</span><span class="p">},</span>
-    <span class="s2">"bacs_att"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"BACS Symbol Coding"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"C0"</span><span class="p">},</span>
     <span class="s2">"bacs_total"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"BACS Total"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"C0"</span><span class="p">},</span>
     <span class="s2">"age_years"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"#90D5FF"</span><span class="p">},</span>
-    <span class="s2">"total_cognition_score"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Total Cognition"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"C0"</span><span class="p">},</span>
+    <span class="s2">"total_cognition_score"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"NIH Toolbox Total Cognition"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"C0"</span><span class="p">},</span>
     <span class="s2">"CPZ_equivalent_calculated"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"CPZ equivalent Dose"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"#d95f02"</span><span class="p">},</span>
-    <span class="s2">"pattern_processing_speed_NIH"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Pattern Processing Speed NIH Toolbox"</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"C0"</span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="n">target_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'panss_negative_EPA'</span><span class="p">,</span>
     <span class="s1">'CPZ_equivalent_calculated'</span><span class="p">,</span>
-    <span class="s1">'bacs_att'</span><span class="p">,</span><span class="s1">'bacs_total'</span><span class="p">,</span> <span class="s1">'panss_positive'</span><span class="p">,</span> <span class="s1">'age_years'</span><span class="p">,</span> <span class="s1">'bnss_apathy'</span><span class="p">,</span> <span class="s1">'total_cognition_score'</span><span class="p">,</span> <span class="s1">'pattern_processing_speed_NIH'</span>
+    <span class="s1">'bacs_total'</span><span class="p">,</span> <span class="s1">'panss_positive'</span><span class="p">,</span> <span class="s1">'age_years'</span><span class="p">,</span> <span class="s1">'bnss_apathy'</span><span class="p">,</span> <span class="s1">'total_cognition_score'</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">tcol</span> <span class="ow">in</span> <span class="n">target_columns</span><span class="p">:</span>
@@ -2098,54 +2095,84 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== panss_negative_EPA / ensemble_avg_weight10p0 =====
+[panss_negative_EPA] combined: n=200, r=0.460, 95% CI [0.344, 0.563]
 </pre></div>
 </div>
 <img alt="_images/6cdfbd7f251d0449c521a2c99f84f7c0d143bf65de10c9f5c73f61e68a535c2c.png" src="_images/6cdfbd7f251d0449c521a2c99f84f7c0d143bf65de10c9f5c73f61e68a535c2c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[panss_negative_EPA] ds1: n=91, r=0.573, 95% CI [0.416, 0.697]
+</pre></div>
+</div>
 <img alt="_images/06bf754b7883349e16e44257446360df34c01978617b53fd51a979fc0939fea3.png" src="_images/06bf754b7883349e16e44257446360df34c01978617b53fd51a979fc0939fea3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[panss_negative_EPA] ds2: n=109, r=0.262, 95% CI [0.078, 0.429]
+</pre></div>
+</div>
 <img alt="_images/8a87ac53f4451a300691a1bcb79cbc01f8f94a3b117f75928478ebb5378c7cff.png" src="_images/8a87ac53f4451a300691a1bcb79cbc01f8f94a3b117f75928478ebb5378c7cff.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== CPZ_equivalent_calculated / ensemble_avg_weight10p0 =====
+[CPZ_equivalent_calculated] combined: n=200, r=0.676, 95% CI [0.593, 0.745]
 </pre></div>
 </div>
 <img alt="_images/847736a064f05dc16dac36cb75be011bcfb2190fa6a574ff7753f4316b42cc1d.png" src="_images/847736a064f05dc16dac36cb75be011bcfb2190fa6a574ff7753f4316b42cc1d.png" />
-<img alt="_images/27c387acd71b407f2b2d63091e23ff6f0fca2f2a7159d0256857d7c19c88705a.png" src="_images/27c387acd71b407f2b2d63091e23ff6f0fca2f2a7159d0256857d7c19c88705a.png" />
-<img alt="_images/1a6a6388bdeb83a5a1fa88a393346bc1f7c5beb2c1301547d36348bcc739c7b6.png" src="_images/1a6a6388bdeb83a5a1fa88a393346bc1f7c5beb2c1301547d36348bcc739c7b6.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== bacs_att / ensemble_avg_weight10p0 =====
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CPZ_equivalent_calculated] ds1: n=90, r=0.518, 95% CI [0.349, 0.655]
 </pre></div>
 </div>
-<img alt="_images/9dc263b876ceff0252ae660db293813e9913755c2f53ff91892596f71bb11371.png" src="_images/9dc263b876ceff0252ae660db293813e9913755c2f53ff91892596f71bb11371.png" />
-<img alt="_images/8cef445531b711972fbd1d2c0311be8c197136f5ca6d9a58e20c17f810f1d7c3.png" src="_images/8cef445531b711972fbd1d2c0311be8c197136f5ca6d9a58e20c17f810f1d7c3.png" />
+<img alt="_images/27c387acd71b407f2b2d63091e23ff6f0fca2f2a7159d0256857d7c19c88705a.png" src="_images/27c387acd71b407f2b2d63091e23ff6f0fca2f2a7159d0256857d7c19c88705a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CPZ_equivalent_calculated] ds2: n=110, r=0.526, 95% CI [0.375, 0.649]
+</pre></div>
+</div>
+<img alt="_images/1a6a6388bdeb83a5a1fa88a393346bc1f7c5beb2c1301547d36348bcc739c7b6.png" src="_images/1a6a6388bdeb83a5a1fa88a393346bc1f7c5beb2c1301547d36348bcc739c7b6.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== bacs_total / ensemble_avg_weight10p0 =====
+[bacs_total] combined: n=89, r=0.496, 95% CI [0.321, 0.639]
 </pre></div>
 </div>
 <img alt="_images/8416d2eb8b2293f63038a5048051d45f110296d842646fe70943f92bde3e18dc.png" src="_images/8416d2eb8b2293f63038a5048051d45f110296d842646fe70943f92bde3e18dc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[bacs_total] ds1: n=89, r=0.496, 95% CI [0.321, 0.639]
+</pre></div>
+</div>
 <img alt="_images/013c63d54d9fb5cf27c61ab3b92298473fff943ebabe375189444352a572bf4e.png" src="_images/013c63d54d9fb5cf27c61ab3b92298473fff943ebabe375189444352a572bf4e.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== panss_positive / ensemble_avg_weight10p0 =====
+[panss_positive] combined: n=200, r=0.241, 95% CI [0.105, 0.367]
 </pre></div>
 </div>
 <img alt="_images/6918381e7115a6bc93713a60e251d24ae6fae59519f85c2da30cbb12cb0b7238.png" src="_images/6918381e7115a6bc93713a60e251d24ae6fae59519f85c2da30cbb12cb0b7238.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[panss_positive] ds1: n=91, r=0.214, 95% CI [0.009, 0.403]
+</pre></div>
+</div>
 <img alt="_images/6bdfe96710d1c857cfc0f3ce0054fec50d01d73bc7dee887fcf442b74d832b22.png" src="_images/6bdfe96710d1c857cfc0f3ce0054fec50d01d73bc7dee887fcf442b74d832b22.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[panss_positive] ds2: n=109, r=0.166, 95% CI [-0.023, 0.344]
+</pre></div>
+</div>
 <img alt="_images/55d12b2fad3eb84b9ef65db07bffa653d8d9202ad9f7add9928ed7367e44bbd2.png" src="_images/55d12b2fad3eb84b9ef65db07bffa653d8d9202ad9f7add9928ed7367e44bbd2.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== age_years / ensemble_avg_weight10p0 =====
+[age_years] combined: n=201, r=0.840, 95% CI [0.793, 0.876]
 </pre></div>
 </div>
 <img alt="_images/38445b60bdcc836953991d9916d503ddce57ad8d371863d53218bab32d8e615e.png" src="_images/38445b60bdcc836953991d9916d503ddce57ad8d371863d53218bab32d8e615e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[age_years] ds1: n=91, r=0.666, 95% CI [0.534, 0.767]
+</pre></div>
+</div>
 <img alt="_images/27b0b6850c95c41fe96e958d963d94478c5656c5b1d15d0a5a6781ccfba66df7.png" src="_images/27b0b6850c95c41fe96e958d963d94478c5656c5b1d15d0a5a6781ccfba66df7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[age_years] ds2: n=110, r=0.351, 95% CI [0.175, 0.505]
+</pre></div>
+</div>
 <img alt="_images/7a52345d47e8c0fb3b20a3bfc65f3d9aed7293096fc283e03c1c56efda6d58dd.png" src="_images/7a52345d47e8c0fb3b20a3bfc65f3d9aed7293096fc283e03c1c56efda6d58dd.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== bnss_apathy / ensemble_avg_weight10p0 =====
+[bnss_apathy] combined: n=91, r=0.511, 95% CI [0.341, 0.649]
 </pre></div>
 </div>
 <img alt="_images/6f77b81529c02408018fa7dd10befb14f24e71f6d6ba84645b692df7b335b1eb.png" src="_images/6f77b81529c02408018fa7dd10befb14f24e71f6d6ba84645b692df7b335b1eb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[bnss_apathy] ds1: n=91, r=0.511, 95% CI [0.341, 0.649]
+</pre></div>
+</div>
 <img alt="_images/bf926b3c98a16b6c629f209df653be2ec434c048d718b97c312eac13648503a3.png" src="_images/bf926b3c98a16b6c629f209df653be2ec434c048d718b97c312eac13648503a3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== total_cognition_score / ensemble_avg_weight10p0 =====
+[total_cognition_score] combined: n=102, r=0.509, 95% CI [0.349, 0.640]
 </pre></div>
 </div>
 <img alt="_images/37c5d437bbe6d98985b7822ca884802e04320979377cc2683332165f14840569.png" src="_images/37c5d437bbe6d98985b7822ca884802e04320979377cc2683332165f14840569.png" />
-<img alt="_images/7e0d9d2e8e243167cf4e843ba3bd6bfd188b83db0860fddee6889d61dee9b078.png" src="_images/7e0d9d2e8e243167cf4e843ba3bd6bfd188b83db0860fddee6889d61dee9b078.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== pattern_processing_speed_NIH / ensemble_avg_weight10p0 =====
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[total_cognition_score] ds2: n=102, r=0.509, 95% CI [0.349, 0.640]
 </pre></div>
 </div>
-<img alt="_images/f8069800a28e4ee269a5a953fb11b7c82a477b2e988f888158c6e64f728ccdec.png" src="_images/f8069800a28e4ee269a5a953fb11b7c82a477b2e988f888158c6e64f728ccdec.png" />
-<img alt="_images/82fc71df3a844603c9c26c71abdf61e25ab7ef780e46504e417416418549bd6e.png" src="_images/82fc71df3a844603c9c26c71abdf61e25ab7ef780e46504e417416418549bd6e.png" />
+<img alt="_images/7e0d9d2e8e243167cf4e843ba3bd6bfd188b83db0860fddee6889d61dee9b078.png" src="_images/7e0d9d2e8e243167cf4e843ba3bd6bfd188b83db0860fddee6889d61dee9b078.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Returned: Figure(700x700)
 </pre></div>
 </div>
@@ -2316,6 +2343,184 @@ pattern\_processing\_speed\_NIH &amp; 0.095 &amp; 0.340 &amp; 0.069 &amp; 0.492 
 \end{tabular}
 
 \end{table}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">SUBJ</span><span class="p">,</span> <span class="n">SESS</span> <span class="o">=</span> <span class="s1">'sub_id'</span><span class="p">,</span> <span class="s1">'session'</span>
+<span class="n">SEX_COL</span><span class="p">,</span> <span class="n">MALE_VALUES</span> <span class="o">=</span> <span class="s1">'sex'</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">,</span> <span class="s1">'m'</span><span class="p">,</span> <span class="s1">'male'</span><span class="p">,</span> <span class="s1">'Male'</span><span class="p">}</span>   <span class="c1"># &lt;- adjust to your column/coding</span>
+<span class="n">DS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Geneva'</span><span class="p">,</span> <span class="s1">'HCP-EP'</span><span class="p">]</span>
+<span class="n">DASH</span><span class="p">,</span> <span class="n">NA</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">'\textemdash'</span><span class="p">,</span> <span class="s1">'n/a'</span>
+
+<span class="n">df2_con</span> <span class="o">=</span> <span class="n">combined</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_ds_2_con</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">'Geneva'</span><span class="p">,</span> <span class="s1">'HC'</span><span class="p">):</span> <span class="n">df1_con</span><span class="p">,</span> <span class="p">(</span><span class="s1">'Geneva'</span><span class="p">,</span> <span class="s1">'SZ'</span><span class="p">):</span> <span class="n">df1_pat</span><span class="p">,</span>
+          <span class="p">(</span><span class="s1">'HCP-EP'</span><span class="p">,</span> <span class="s1">'HC'</span><span class="p">):</span> <span class="n">df2_con</span><span class="p">,</span> <span class="p">(</span><span class="s1">'HCP-EP'</span><span class="p">,</span> <span class="s1">'SZ'</span><span class="p">):</span> <span class="n">df2_pat</span><span class="p">}</span>
+
+<span class="c1"># column: (label, decimals, datasets where collected, patients only?)</span>
+<span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'panss_positive'</span><span class="p">:</span>            <span class="p">(</span><span class="s1">'PANSS Positive'</span><span class="p">,</span>                       <span class="mi">1</span><span class="p">,</span> <span class="n">DS</span><span class="p">,</span>         <span class="kc">True</span><span class="p">),</span>
+    <span class="s1">'panss_negative_EPA'</span><span class="p">:</span>        <span class="p">(</span><span class="s1">'PANSS Negative'</span><span class="p">,</span>                       <span class="mi">1</span><span class="p">,</span> <span class="n">DS</span><span class="p">,</span>         <span class="kc">True</span><span class="p">),</span>
+    <span class="s1">'bnss_apathy'</span><span class="p">:</span>               <span class="p">(</span><span class="s1">'BNSS Apathy'</span><span class="p">,</span>                          <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">'Geneva'</span><span class="p">],</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="s1">'CPZ_equivalent_calculated'</span><span class="p">:</span> <span class="p">(</span><span class="s1">'Antipsychotic dose, CPZ eq. (mg/day)'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">DS</span><span class="p">,</span>         <span class="kc">True</span><span class="p">),</span>
+    <span class="s1">'bacs_total'</span><span class="p">:</span>                <span class="p">(</span><span class="s1">'BACS Composite score'</span><span class="p">,</span>                 <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">'Geneva'</span><span class="p">],</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="s1">'total_cognition_score'</span><span class="p">:</span>     <span class="p">(</span><span class="s1">'NIH Toolbox Total Cognition'</span><span class="p">,</span>          <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">'HCP-EP'</span><span class="p">],</span> <span class="kc">False</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">SECTIONS</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'Clinical characteristics, mean $</span><span class="se">\\</span><span class="s1">pm$ SD'</span><span class="p">,</span>
+             <span class="p">[</span><span class="s1">'panss_positive'</span><span class="p">,</span> <span class="s1">'panss_negative_EPA'</span><span class="p">,</span> <span class="s1">'bnss_apathy'</span><span class="p">,</span> <span class="s1">'CPZ_equivalent_calculated'</span><span class="p">]),</span>
+            <span class="p">(</span><span class="s1">'Cognition, mean $</span><span class="se">\\</span><span class="s1">pm$ SD'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'bacs_total'</span><span class="p">,</span> <span class="s1">'total_cognition_score'</span><span class="p">])]</span>
+
+<span class="c1"># ------------- units of observation -------------</span>
+<span class="c1"># demographics: one row per subject (Geneva: baseline session; HCP-EP: runs collapsed)</span>
+<span class="c1"># clinical/cognitive: Geneva every session; HCP-EP runs collapsed (single visit)</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'age_years'</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">VARIABLES</span><span class="p">)</span>
+<span class="n">demo</span><span class="p">,</span> <span class="n">clin</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">),</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
+    <span class="n">demo_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'age_years'</span><span class="p">]</span> <span class="o">+</span> <span class="p">([</span><span class="n">SEX_COL</span><span class="p">]</span> <span class="k">if</span> <span class="n">SEX_COL</span> <span class="ow">in</span> <span class="n">d</span> <span class="k">else</span> <span class="p">[])</span>
+    <span class="k">if</span> <span class="n">ds</span> <span class="o">==</span> <span class="s1">'Geneva'</span><span class="p">:</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">SESS</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">SUBJ</span><span class="p">)[</span><span class="n">SESS</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">'min'</span><span class="p">)]</span>
+        <span class="n">demo</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">)]</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">SUBJ</span><span class="p">)[</span><span class="n">demo_cols</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="n">clin</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">)]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">SUBJ</span><span class="p">,</span> <span class="n">SESS</span><span class="p">])[</span><span class="nb">list</span><span class="p">(</span><span class="n">VARIABLES</span><span class="p">)]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">demo</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">)]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">SUBJ</span><span class="p">)[</span><span class="n">demo_cols</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="n">clin</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">)]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">SUBJ</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">VARIABLES</span><span class="p">)]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"subjects:            "</span><span class="p">,</span> <span class="p">{</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">demo</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"clinical observations:"</span><span class="p">,</span> <span class="p">{</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">clin</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+
+<span class="c1"># ---------------- helpers ----------------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fp</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">DASH</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="s1">'$&lt;$0.001'</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.001</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">msd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">NA</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">'$</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.</span><span class="si">{</span><span class="n">dec</span><span class="si">}</span><span class="s1">f</span><span class="si">}</span><span class="s1"> </span><span class="se">\\</span><span class="s1">pm </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s1">.</span><span class="si">{</span><span class="n">dec</span><span class="si">}</span><span class="s1">f</span><span class="si">}</span><span class="s1">$'</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cont_cells</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">collected</span><span class="o">=</span><span class="n">DS</span><span class="p">,</span> <span class="n">pat_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">ds</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collected</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">NA</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="n">DASH</span><span class="p">,</span> <span class="n">DASH</span><span class="p">]</span>
+    <span class="n">hc</span><span class="p">,</span> <span class="n">pt</span> <span class="o">=</span> <span class="n">src</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">'HC'</span><span class="p">)][</span><span class="n">col</span><span class="p">],</span> <span class="n">src</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">'SZ'</span><span class="p">)][</span><span class="n">col</span><span class="p">]</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">DASH</span> <span class="k">if</span> <span class="n">pat_only</span> <span class="k">else</span> <span class="n">msd</span><span class="p">(</span><span class="n">hc</span><span class="p">,</span> <span class="n">dec</span><span class="p">),</span> <span class="n">msd</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="n">dec</span><span class="p">)]</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">hc</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">pt</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">pat_only</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">out</span> <span class="o">+</span> <span class="p">[</span><span class="n">DASH</span><span class="p">,</span> <span class="n">DASH</span><span class="p">]</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>          <span class="c1"># Student's t-test, HC minus patients</span>
+    <span class="k">return</span> <span class="n">out</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'$t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">$'</span><span class="p">,</span> <span class="n">fp</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">range_cells</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'HC'</span><span class="p">,</span> <span class="s1">'SZ'</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">demo</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">)][</span><span class="s1">'age_years'</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>   <span class="c1"># completed years: 30.9 -&gt; 30</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span> <span class="o">+</span> <span class="p">[</span><span class="n">DASH</span><span class="p">,</span> <span class="n">DASH</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sex_cells</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+    <span class="n">tab</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">MALE_VALUES</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="nb">int</span><span class="p">((</span><span class="o">~</span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">MALE_VALUES</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())]</span>
+           <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="n">demo</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span> <span class="n">g</span><span class="p">)][</span><span class="n">SEX_COL</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'HC'</span><span class="p">,</span> <span class="s1">'SZ'</span><span class="p">))]</span>
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tab</span><span class="p">),</span> <span class="n">correction</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tab</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">chi^2=</span><span class="si">{</span><span class="n">chi2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">$'</span><span class="p">,</span> <span class="n">fp</span><span class="p">(</span><span class="n">p</span><span class="p">)]</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tab</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">DASH</span><span class="p">,</span> <span class="n">DASH</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">counts</span><span class="p">,</span> <span class="n">pct</span>
+
+<span class="n">row</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">label</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="s1">'        '</span> <span class="o">+</span> <span class="s1">' &amp; '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">label</span><span class="p">]</span> <span class="o">+</span> <span class="n">cells</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">' </span><span class="se">\\</span><span class="s1">'</span>
+
+<span class="c1"># ---------------- rows ----------------</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">(</span><span class="s1">'Age, years, mean $</span><span class="se">\\</span><span class="s1">pm$ SD'</span><span class="p">,</span>
+            <span class="n">cont_cells</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="s1">'Geneva'</span><span class="p">,</span> <span class="s1">'age_years'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cont_cells</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="s1">'HCP-EP'</span><span class="p">,</span> <span class="s1">'age_years'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="n">row</span><span class="p">(</span><span class="s1">'Age, years, range (min - max)'</span><span class="p">,</span> <span class="n">range_cells</span><span class="p">(</span><span class="s1">'Geneva'</span><span class="p">)</span> <span class="o">+</span> <span class="n">range_cells</span><span class="p">(</span><span class="s1">'HCP-EP'</span><span class="p">))]</span>
+<span class="k">if</span> <span class="n">SEX_COL</span> <span class="ow">in</span> <span class="n">df1_pat</span><span class="p">:</span>
+    <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">sex_cells</span><span class="p">(</span><span class="s1">'Geneva'</span><span class="p">),</span> <span class="n">sex_cells</span><span class="p">(</span><span class="s1">'HCP-EP'</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">+=</span> <span class="p">[</span><span class="n">row</span><span class="p">(</span><span class="s1">'Sex, male / female, $n$'</span><span class="p">,</span> <span class="n">s1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">s2</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">row</span><span class="p">(</span><span class="s1">'Male, </span><span class="se">\\</span><span class="s1">%'</span><span class="p">,</span> <span class="n">s1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">s2</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[WARN] '</span><span class="si">{</span><span class="n">SEX_COL</span><span class="si">}</span><span class="s2">' not found - sex rows skipped"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">title</span><span class="p">,</span> <span class="n">cols</span> <span class="ow">in</span> <span class="n">SECTIONS</span><span class="p">:</span>
+    <span class="n">rows</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">'        </span><span class="se">\\</span><span class="s1">addlinespace'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'        </span><span class="se">\\</span><span class="s1">multicolumn</span><span class="se">{{</span><span class="s1">9</span><span class="se">}}{{</span><span class="s1">l</span><span class="se">}}{{\\</span><span class="s1">textit</span><span class="se">{{</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">}}}}</span><span class="s1"> </span><span class="se">\\\\</span><span class="s1">'</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+        <span class="n">lab</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">coll</span><span class="p">,</span> <span class="n">po</span> <span class="o">=</span> <span class="n">VARIABLES</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span> <span class="n">cont_cells</span><span class="p">(</span><span class="n">clin</span><span class="p">,</span> <span class="s1">'Geneva'</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">coll</span><span class="p">,</span> <span class="n">po</span><span class="p">)</span> <span class="o">+</span>
+                             <span class="n">cont_cells</span><span class="p">(</span><span class="n">clin</span><span class="p">,</span> <span class="s1">'HCP-EP'</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">coll</span><span class="p">,</span> <span class="n">po</span><span class="p">)))</span>
+
+<span class="c1"># ---------------- LaTeX ----------------</span>
+<span class="n">hdr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">DS</span><span class="p">:</span>
+    <span class="n">hdr</span> <span class="o">+=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="se">\\</span><span class="s2">textbf</span><span class="se">{{</span><span class="s2">HC ($n=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">demo</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span><span class="w"> </span><span class="s1">'HC'</span><span class="p">)])</span><span class="si">}</span><span class="s2">$)</span><span class="se">}}</span><span class="s2">"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\\</span><span class="s2">textbf</span><span class="se">{{</span><span class="s2">SZ ($n=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">demo</span><span class="p">[(</span><span class="n">ds</span><span class="p">,</span><span class="w"> </span><span class="s1">'SZ'</span><span class="p">)])</span><span class="si">}</span><span class="s2">$)</span><span class="se">}}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="sa">r</span><span class="s1">'\textbf</span><span class="si">{Statistic}</span><span class="s1">'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\textbf{$p$}'</span><span class="p">]</span>
+
+<span class="n">latex</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+    <span class="sa">r</span><span class="s1">'\begin{table*}[htbp]'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'    \centering'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'    \caption{Demographic, clinical, and cognitive characteristics of the in-house and HCP-EP cohorts}'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'    \label{tab:demographics}'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'    \begin</span><span class="si">{threeparttable}</span><span class="s1">'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'    \resizebox{\textwidth}{!}{%'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'    \begin</span><span class="si">{tabular}</span><span class="s1">{lcccc@{\hspace</span><span class="si">{1.5em}</span><span class="s1">}cccc}'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'        \toprule'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        &amp; \multicolumn</span><span class="si">{4}{c}</span><span class="s1">{\textbf</span><span class="si">{Geneva}</span><span class="s1">}'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'        &amp; \multicolumn</span><span class="si">{4}{c}</span><span class="s1">{\textbf{HCP-EP}} </span><span class="se">\\</span><span class="s1">'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        \cmidrule(lr){2-5}'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'        \cmidrule(lr){6-9}'</span><span class="p">,</span>
+    <span class="s1">'        '</span> <span class="o">+</span> <span class="s1">' &amp; '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s1">'\textbf</span><span class="si">{Characteristic}</span><span class="s1">'</span><span class="p">]</span> <span class="o">+</span> <span class="n">hdr</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">' </span><span class="se">\\</span><span class="s1">'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'        \midrule'</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">rows</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        \bottomrule'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'    \end</span><span class="si">{tabular}</span><span class="s1">%'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'    }'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'    \begin</span><span class="si">{tablenotes}</span><span class="s1">[flushleft]'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'        \footnotesize'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        \item \textit{Note.}Group comparisons: independent-samples'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        $t$-test (continuous variables) and $\chi^2$ test without continuity correction (sex).'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        n/a = not assessed in this cohort; \textemdash</span><span class="si">{}</span><span class="s1"> = not applicable.'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        HC = healthy controls; SZ = schizophrenia; SD = standard deviation; PANSS = Positive and Negative Syndrome Scale;'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        BNSS = Brief Negative Symptom Scale; BACS = Brief Assessment of Cognition in Schizophrenia;'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'        CPZ eq. = chlorpromazine equivalents.'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'    \end</span><span class="si">{tablenotes}</span><span class="s1">'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'    \end</span><span class="si">{threeparttable}</span><span class="s1">'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'\end{table*}'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">latex</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>subjects:             {'Geneva HC': 49, 'Geneva SZ': 66, 'HCP-EP HC': 32, 'HCP-EP SZ': 110}
+clinical observations: {'Geneva HC': 68, 'Geneva SZ': 91, 'HCP-EP HC': 32, 'HCP-EP SZ': 110}
+\begin{table*}[htbp]
+    \centering
+    \caption{Demographic, clinical, and cognitive characteristics of the in-house and HCP-EP cohorts}
+    \label{tab:demographics}
+    \begin{threeparttable}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcccc@{\hspace{1.5em}}cccc}
+        \toprule
+        &amp; \multicolumn{4}{c}{\textbf{Geneva}}
+        &amp; \multicolumn{4}{c}{\textbf{HCP-EP}} \\
+        \cmidrule(lr){2-5}
+        \cmidrule(lr){6-9}
+        \textbf{Characteristic} &amp; \textbf{HC ($n=49$)} &amp; \textbf{SZ ($n=66$)} &amp; \textbf{Statistic} &amp; \textbf{$p$} &amp; \textbf{HC ($n=32$)} &amp; \textbf{SZ ($n=110$)} &amp; \textbf{Statistic} &amp; \textbf{$p$} \\
+        \midrule
+        Age, years, mean $\pm$ SD &amp; $39.3 \pm 7.8$ &amp; $36.8 \pm 9.4$ &amp; $t=1.50$ &amp; 0.14 &amp; $23.8 \pm 3.6$ &amp; $22.7 \pm 3.6$ &amp; $t=1.48$ &amp; 0.14 \\
+        Age, years, range (min - max) &amp; 20--54 &amp; 19--56 &amp; \textemdash &amp; \textemdash &amp; 16--30 &amp; 16--34 &amp; \textemdash &amp; \textemdash \\
+        Sex, male / female, $n$ &amp; 35 / 14 &amp; 53 / 13 &amp; $\chi^2=1.23$ &amp; 0.27 &amp; 19 / 13 &amp; 70 / 40 &amp; $\chi^2=0.19$ &amp; 0.66 \\
+        Male, \% &amp; 71.4 &amp; 80.3 &amp; \textemdash &amp; \textemdash &amp; 59.4 &amp; 63.6 &amp; \textemdash &amp; \textemdash \\
+        \addlinespace
+        \multicolumn{9}{l}{\textit{Clinical characteristics, mean $\pm$ SD}} \\
+        PANSS Positive &amp; \textemdash &amp; $9.9 \pm 3.2$ &amp; \textemdash &amp; \textemdash &amp; \textemdash &amp; $11.2 \pm 4.0$ &amp; \textemdash &amp; \textemdash \\
+        PANSS Negative &amp; \textemdash &amp; $11.3 \pm 5.4$ &amp; \textemdash &amp; \textemdash &amp; \textemdash &amp; $10.2 \pm 4.6$ &amp; \textemdash &amp; \textemdash \\
+        BNSS Apathy &amp; \textemdash &amp; $12.4 \pm 8.7$ &amp; \textemdash &amp; \textemdash &amp; n/a &amp; n/a &amp; \textemdash &amp; \textemdash \\
+        Antipsychotic dose, CPZ eq. (mg/day) &amp; \textemdash &amp; $462 \pm 253$ &amp; \textemdash &amp; \textemdash &amp; \textemdash &amp; $174 \pm 232$ &amp; \textemdash &amp; \textemdash \\
+        \addlinespace
+        \multicolumn{9}{l}{\textit{Cognition, mean $\pm$ SD}} \\
+        BACS Composite score &amp; $54.0 \pm 12.6$ &amp; $34.9 \pm 11.2$ &amp; $t=10.05$ &amp; $&lt;$0.001 &amp; n/a &amp; n/a &amp; \textemdash &amp; \textemdash \\
+        NIH Toolbox Total Cognition &amp; n/a &amp; n/a &amp; \textemdash &amp; \textemdash &amp; $111.9 \pm 8.5$ &amp; $100.3 \pm 13.1$ &amp; $t=4.63$ &amp; $&lt;$0.001 \\
+        \bottomrule
+    \end{tabular}%
+    }
+    \begin{tablenotes}[flushleft]
+        \footnotesize
+        \item \textit{Note.}Group comparisons: independent-samples
+        $t$-test (continuous variables) and $\chi^2$ test without continuity correction (sex).
+        n/a = not assessed in this cohort; \textemdash{} = not applicable.
+        HC = healthy controls; SZ = schizophrenia; SD = standard deviation; PANSS = Positive and Negative Syndrome Scale;
+        BNSS = Brief Negative Symptom Scale; BACS = Brief Assessment of Cognition in Schizophrenia;
+        CPZ eq. = chlorpromazine equivalents.
+    \end{tablenotes}
+    \end{threeparttable}
+\end{table*}
 </pre></div>
 </div>
 </div>
